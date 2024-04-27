@@ -71,6 +71,17 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_HOST: ${DB_HOST}
+            PMA_PORT: ${DB_PORT}
+            PMA_USER: "${DB_USERNAME}"
+            PMA_PASSWORD: "${DB_PASSWORD}"
+        ports:
+            - "5001:80"
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
