@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
 class SettingsController extends Controller
@@ -21,7 +21,19 @@ class SettingsController extends Controller
             ]
         ];
 
-        return response()->json($settings);
+        return $settings;
+    }
+
+    public function translations()
+    {
+        $translations = [];
+
+        $translations['auth'] = __('auth');
+        $translations['pagination'] = __('pagination');
+        $translations['passwords'] = __('passwords');
+        $translations['validation'] = __('validation');
+
+        return $translations;
     }
 
 }
