@@ -31,6 +31,7 @@ class SettingsController extends Controller
         $translations['pagination'] = __('pagination');
         $translations['passwords'] = __('passwords');
         $translations['validation'] = __('validation');
+        $translations['form'] = __('form');
 
         return $translations;
     }
