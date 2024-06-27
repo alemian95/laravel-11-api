@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Locale;
 use Symfony\Component\HttpFoundation\Response;
 
 class InternationalizationMiddleware
@@ -15,7 +16,14 @@ class InternationalizationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        app()->setLocale(substr(locale_accept_from_http($request->headers->get('Accept-Language')), 0, 2));
+
+        $defaultLocale = 'en';
+        $availableLocales = [ 'en', 'it' ];
+        $currentLocale = Locale::acceptFromHttp($request->server('HTTP_ACCEPT_LANGUAGE'));
+
+        $locale = Locale::lookup($availableLocales, $currentLocale, true, $defaultLocale);
+
+        app()->setLocale($locale);
         return $next($request);
     }
 }
