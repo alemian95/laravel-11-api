@@ -14,9 +14,9 @@ class SettingsController extends Controller
             'app_name' => env("APP_NAME"),
             'app_debug' => env("APP_DEBUG"),
             'localization' => [
-                'default' => env("APP_LOCALE"),
-                'fallback' => env("APP_FALLBACK_LOCALE"),
-                'current' => Session::get('locale') ?? env("APP_LOCALE")
+                'default' => app()->getLocale(),
+                'fallback' => app()->getFallbackLocale(),
+                'current' => Session::get('locale') ?? app()->getLocale()
             ]
         ];
 
